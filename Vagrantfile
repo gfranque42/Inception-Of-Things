@@ -1,0 +1,20 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "debian/bullseye64"
+  config.vm.box_version = "11.20241217.1"
+  config.vm.define "gfranqueS" do |control|
+    control.vm.hostname = "gfranqueS"
+    control.vm.network "private_network", ip: "192.168.56.110"
+    control.vm.provider "virtualbox" do |v|
+      v.name = "gfranqueS"
+    end
+    control.vm.provision "shell", path: "server.sh"
+  end
+  config.vm.define "gfranqueSW" do |control|
+    control.vm.hostname = "gfranqueSW"
+    control.vm.network "private_network", ip: "192.168.56.111"
+    control.vm.provider "virtualbox" do |v|
+      v.name = "gfranqueSW"
+    end
+    control.vm.provision "shell", path: "agent.sh"
+  end
+end
