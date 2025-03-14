@@ -1,0 +1,15 @@
+Vagrant.configure(2) do |config|
+    config.vm.box = "debian/bookworm64"
+    config.vm.box_version = "12.20250126.1"
+    config.vm.synced_folder "./", "/home/user/project"
+    config.vm.define "iot" do |control|
+      control.vm.hostname = "iot"
+      control.vm.provider "virtualbox" do |v|
+        v.name = "iot"
+        v.cpus = 10
+        v.memory = 12288
+        v.gui = true
+      end
+      control.vm.provision "shell", path: "vmsetup.sh"
+    end
+  end
