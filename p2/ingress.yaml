@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: website-a-ingress
+spec:
+  rules:
+  - host: site1.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: website-a-service
+            port:
+              number: 80
+  - host: site2.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: website-b-service
+            port:
+              number: 80
+  - host: site3.local  # This line was missing indentation
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: website-c-service
+            port:
+              number: 80
+  - http:  # Default fallback route without `host` (no hostname, catch-all)
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: website-c-service
+            port:
+              number: 80
