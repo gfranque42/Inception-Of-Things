@@ -36,7 +36,7 @@ sudo apt-get install -y kubectl
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
 
-k3d cluster create my-cluster --api-port 6443 -p 8080:80@loadbalancer --agents 2
+k3d cluster create my-cluster --api-port 6443 -p 8081:443@loadbalancer --agents 2
 
 # kubectl version
 
