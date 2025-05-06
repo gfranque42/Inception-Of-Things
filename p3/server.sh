@@ -36,7 +36,7 @@ sudo apt-get install -y kubectl
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
 
-k3d cluster create my-cluster --api-port 6443 --port 8080:80@loadbalancer --port 8443:443@loadbalancer --agents 2 --k3s-arg "--disable=traefik@server:0"
+k3d cluster create my-cluster --api-port 6443 --port 8080:80@loadbalancer --port 8443:443@loadbalancer --agents 2
 
 # kubectl version
 
@@ -49,3 +49,9 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 
 # kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl get pod -n argocd
+
+kubectl port-forward -n argocd svc/argocd-server 8083:443
+
+
