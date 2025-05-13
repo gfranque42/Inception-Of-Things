@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: website-c
   labels:
-    app: website-c  # <-- This is key
+    app: website-c 
 spec:
   containers:
     - name: custom-website
@@ -18,7 +18,7 @@ kind: Pod
 metadata:
   name: website-c-bis
   labels:
-    app: website-c  # <-- This is key
+    app: website-c
 spec:
   containers:
     - name: custom-website
@@ -33,7 +33,7 @@ kind: Pod
 metadata:
   name: website-c-ter
   labels:
-    app: website-c  # <-- This is key
+    app: website-c
 spec:
   containers:
     - name: custom-website

@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: website-a
   labels:
-    app: website-a  # <-- This is key
+    app: website-a
 spec:
   containers:
     - name: custom-website

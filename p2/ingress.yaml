@@ -4,7 +4,7 @@ metadata:
   name: website-a-ingress
 spec:
   rules:
-  - host: site1.local
+  - host: app1.com
     http:
       paths:
       - path: /
@@ -14,7 +14,7 @@ spec:
             name: website-a-service
             port:
               number: 80
-  - host: site2.local
+  - host: app2.com
     http:
       paths:
       - path: /
@@ -24,7 +24,7 @@ spec:
             name: website-b-service
             port:
               number: 80
-  - host: site3.local  # This line was missing indentation
+  - host: app3.com
     http:
       paths:
       - path: /
@@ -34,7 +34,7 @@ spec:
             name: website-c-service
             port:
               number: 80
-  - http:  # Default fallback route without `host` (no hostname, catch-all)
+  - http: 
       paths:
       - path: /
         pathType: Prefix
