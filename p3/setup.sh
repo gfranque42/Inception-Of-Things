@@ -25,8 +25,8 @@ apt-get update
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo usermod -aG docker $USER
-newgrp docker
+# sudo usermod -aG docker $USER
+# newgrp docker
 
 #k3d setup
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
@@ -38,6 +38,7 @@ kubectl create namespace argocd
 kubectl create namespace dev
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl config set-context --current --namespace=argocd
+kubectl wait --for=condition=Ready -A
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 kubectl port-forward svc/argocd-server -n argocd 8083:443
 
