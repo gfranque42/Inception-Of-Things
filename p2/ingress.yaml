@@ -24,16 +24,6 @@ spec:
             name: website-b-service
             port:
               number: 80
-  - host: app3.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: website-c-service
-            port:
-              number: 80
   - http: 
       paths:
       - path: /
