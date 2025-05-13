@@ -25,8 +25,8 @@ apt-get update
 
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo usermod -aG docker $USER
-newgrp docker
+# sudo usermod -aG docker $USER
+# newgrp docker
 
 #k3d setup
 curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
@@ -39,7 +39,7 @@ kubectl create namespace dev
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl config set-context --current --namespace=argocd
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-kubectl port-forward svc/argocd-server -n argocd 8083:443
+kubectl port-forward svc/argocd-server -n argocd 8083:443 &
 
 #argocd cli setup
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
@@ -48,7 +48,7 @@ rm argocd-linux-amd64
 
 argocd cluster add -y k3d-my-cluster
 kubectl config set-context --current --namespace=argocd
-argocd app create playground --repo https://github.com/gfranque42/Inception-Of-Things/tree/adrip3/p3 --path app --dest-server https://kubernetes.default.svc --dest-namespace dev --server localhost:8083 --insecure
+argocd app create playground --repo https://github.com/gfranque42/Inception-Of-Things.git --path p3/app --dest-server https://kubernetes.default.svc --dest-namespace dev --server localhost:8083 --insecure
 
 # argocd account update-password
 argocd app sync playground
