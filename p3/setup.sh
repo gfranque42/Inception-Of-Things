@@ -40,7 +40,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl config set-context --current --namespace=argocd
 kubectl wait --for=condition=Ready -A
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-kubectl port-forward svc/argocd-server -n argocd 8083:443
+kubectl port-forward svc/argocd-server -n argocd 8083:443 &
 
 #argocd cli setup
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
@@ -49,8 +49,8 @@ rm argocd-linux-amd64
 
 argocd cluster add -y k3d-my-cluster
 kubectl config set-context --current --namespace=argocd
-argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default --server localhost:8083 --insecure
+argocd app create playground --repo https://github.com/gfranque42/Inception-Of-Things.git --path p3/app --dest-server https://kubernetes.default.svc --dest-namespace dev --server localhost:8083 --insecure
 
 # argocd account update-password
-argocd app get guestbook
-argocd app sync guestbook
+argocd app sync playground
+argocd app get playground
