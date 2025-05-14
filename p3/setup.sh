@@ -9,7 +9,7 @@ kubectl config use-context k3d-my-cluster
 # k3d argocd setup
 kubectl create namespace argocd
 kubectl create namespace dev
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -n argocd -f ./install.yaml
 kubectl config set-context --current --namespace=argocd
 kubectl wait --for=condition=Ready pods --all -n argocd --timeout=600s
 kubectl get all 
