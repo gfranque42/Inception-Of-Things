@@ -1,5 +1,5 @@
 all:
-	sh setup.sh
+	sudo sh setup.sh
 
 fclean:
 	k3d cluster delete --all
