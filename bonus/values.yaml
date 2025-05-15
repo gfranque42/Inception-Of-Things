@@ -1,0 +1,42 @@
+# global:
+#   hosts:
+#     domain: localhost
+#     externalIP: "127.0.0.1"
+
+#   ingress:
+#     configureCertmanager: false
+#     class: nginx
+#     tls:
+#       enabled: false
+
+# certmanager:
+#   install: false
+
+# nginx-ingress:
+#   enabled: true
+
+# prometheus:
+#   install: false
+
+# gitlab-runner:
+#   install: false
+
+global:
+  edition: ce
+  hosts:
+    domain: localhost
+    externalIP: 127.0.0.1
+    https: false
+  ingress:
+    configureCertmanager: false
+    tls:
+      enabled: false
+
+gitlab:
+  webservice:
+    service:
+      type: LoadBalancer
+      loadBalancerSourceRanges:
+        - 127.0.0.1/32
+
+
