@@ -2,7 +2,7 @@ all:
 	sudo sh setup.sh
 
 fclean:
-	k3d cluster delete --all
+	sudo k3d cluster delete --all
 
 re: fclean all
 
