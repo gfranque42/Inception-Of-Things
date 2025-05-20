@@ -3,6 +3,8 @@ all:
 
 fclean:
 	sudo k3d cluster delete --all
+	sudo docker volume prune
+	sudo docker system prune -af
 
 re: fclean all
 
