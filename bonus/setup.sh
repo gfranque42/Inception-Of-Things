@@ -34,7 +34,7 @@ argocd cluster add -y k3d-my-cluster --server localhost:8080 --insecure
 helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 kubectl create namespace gitlab
-helm install gitlab gitlab/gitlab --namespace gitlab --values values.yaml
+helm upgrade --install gitlab gitlab/gitlab --namespace gitlab --values values.yaml
 kubectl wait --for=condition=ready pod -l app=webservice -n gitlab --timeout=600s
 kubectl port-forward svc/gitlab-webservice-default 8081:8080 -n gitlab &
 echo "GitLab password:"

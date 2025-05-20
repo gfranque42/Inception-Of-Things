@@ -1,42 +1,72 @@
-# global:
-#   hosts:
-#     domain: localhost
-#     externalIP: "127.0.0.1"
-
-#   ingress:
-#     configureCertmanager: false
-#     class: nginx
-#     tls:
-#       enabled: false
-
-# certmanager:
-#   install: false
-
-# nginx-ingress:
-#   enabled: true
-
-# prometheus:
-#   install: false
-
-# gitlab-runner:
-#   install: false
-
 global:
   edition: ce
   hosts:
     domain: localhost
-    externalIP: 127.0.0.1
+    externalIP: "127.0.0.1"
     https: false
   ingress:
     configureCertmanager: false
+    class: none
     tls:
       enabled: false
+  shell:
+    port: 22
+
+  email:
+    from: gitlab@localhost
+    display_name: GitLab
+
+  appConfig:
+    enableUsagePing: false
+    enableSeatLink: false
+    enableReports: false
+    object_store:
+      enabled: false
+    smtp:
+      enabled: false
+    incomingEmail:
+      enabled: false
+:
+certmanager:
+  install: false
+
+nginx-ingress:
+  enabled: false
+
+prometheus:
+  install: false
+
+gitlab-runner:
+  install: false
+
+registry:
+  enabled: false
+
+minio:
+  enabled: false
+
+redis:
+  install: true
+
+postgresql:
+  install: true
+
+gitaly:
+  persistence:
+    storageClass: "standard"
 
 gitlab:
   webservice:
+    ingress:
+      enabled: false
     service:
-      type: LoadBalancer
-      loadBalancerSourceRanges:
-        - 127.0.0.1/32
+      type: NodePort
+      nodePort: 30080
 
+  sidekiq:
+    enabled: true
+    service:
+      type: ClusterIP
 
+  toolbox:
+    enabled: true
