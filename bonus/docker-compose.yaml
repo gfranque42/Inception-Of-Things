@@ -1,0 +1,11 @@
+services:
+  gitlab:
+    container_name: gitlab
+    build:
+      context: ./gitlab
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "2222:22"
+    hostname: localhost
+    
