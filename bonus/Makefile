@@ -16,9 +16,10 @@ uninstall:
 
 dockerup:
 	docker compose up --build -d
-	sleep 120
-	docker exec -it gitlab cat /etc/gitlab/initial_root_password
-
+	@echo "waiting for setup"
+	@sleep 120
+	@echo "setup done"
+	@./gitlabsetup.sh
 dockerdown:
 	docker compose stop
 	docker compose down
