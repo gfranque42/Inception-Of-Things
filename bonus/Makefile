@@ -1,7 +1,12 @@
 all:
+	sudo docker compose up --build -d
+	@echo "waiting for setup"
+	@sleep 120
+	@echo "setup done"
+	@./gitlabsetup.sh
 	sudo sh setup.sh
 
-fclean:
+fclean: dockerdown
 	sudo k3d cluster delete --all
 	sudo docker volume prune
 	sudo docker system prune -af
@@ -14,14 +19,8 @@ install:
 uninstall:
 	sudo sh uninstall.sh
 
-dockerup:
-	docker compose up --build -d
-	@echo "waiting for setup"
-	@sleep 120
-	@echo "setup done"
-	@./gitlabsetup.sh
 dockerdown:
-	docker compose stop
-	docker compose down
+	sudo docker compose stop
+	sudo docker compose down
 
 .PHONY: fclean re all stat uninstall install
