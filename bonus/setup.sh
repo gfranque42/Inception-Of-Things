@@ -17,7 +17,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 # argocd CLI setup
 ARGOCD_PASSWORD=$(kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 --decode)
-echo $ARGOCD_PASSWORD
+echo "Argocd Password: $ARGOCD_PASSWORD"
 argocd login localhost:8080 --username admin --password "$ARGOCD_PASSWORD" --insecure
 argocd cluster add -y k3d-my-cluster --server localhost:8080 --insecure
 # kubectl config set-context --current --namespace=argocd
